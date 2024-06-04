@@ -1,5 +1,4 @@
-const Book = require("../models/Book");
-const Review = require("../models/Review");
+const Book = require("../models/Books");
 
 // Get all books
 exports.getBooks = async (req, res) => {

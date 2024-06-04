@@ -1,4 +1,4 @@
-const Book = require("../models/Book");
+const Book = require("../models/Books");
 const Review = require("../models/Review");
 
 // Add a review to a book

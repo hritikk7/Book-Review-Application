@@ -6,7 +6,7 @@ const BookSchema = new Schema({
   description: { type: String },
   genre: { type: String },
   averageRating: { type: Number, default: 0 },
-  reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Review" }],
+  reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
 });
 
-module.exports = mongoose.model("Book", BookSchema);
+module.exports = model("Book", BookSchema);
