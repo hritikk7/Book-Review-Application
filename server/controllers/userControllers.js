@@ -5,19 +5,18 @@ const jwt = require("jsonwebtoken");
 
 //Register User
 exports.registerUser = async (req, res) => {
-  const { email, username, password } = req.body;
-  console.log( "email, username, password",  email, username, password);
+  const { email, password } = req.body;
+  console.log("email,  password", email, password);
   try {
-    if (!email || !username || !password) {
+    if (!email || !password) {
       return res.status(400).json({
         message: "Fill all the fields",
       });
     }
 
     const existingEmail = await User.findOne({ email });
-    const existingUserName = await User.findOne({ username });
 
-    if (existingEmail || existingUserName) {
+    if (existingEmail) {
       return res.status(400).json({
         message: "User already exists !!",
       });
@@ -28,7 +27,6 @@ exports.registerUser = async (req, res) => {
       user_id: uuidv4(),
       email: lowerEmail,
       password: hashedPassKey,
-      username,
     });
 
     await newUser.save();
@@ -44,9 +42,9 @@ exports.registerUser = async (req, res) => {
 
 //Login for a patient
 exports.loginUser = async (req, res) => {
-  const { email, username, password } = req.body;
+  const { email, password } = req.body;
   try {
-    if ((!email && !username) || !password) {
+    if (!email || !password) {
       return res.status(400).json({
         message: "Fill all the fields",
       });
@@ -63,12 +61,11 @@ exports.loginUser = async (req, res) => {
           message: "password dosent match",
         });
       }
-      const token = jwt.sign({ id: user._id, username }, "ssssh", {
+      const token = jwt.sign({ id: user._id, email }, "ssssh", {
         expiresIn: "1h",
       });
       return res.status(200).json({
         message: "Login Succesfull",
-        username,
         token,
       });
     } else {
@@ -81,5 +78,3 @@ exports.loginUser = async (req, res) => {
     return res.status(500).json({ error: "Error regestring user" });
   }
 };
-
-

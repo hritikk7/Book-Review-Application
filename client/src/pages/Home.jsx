@@ -86,7 +86,7 @@ function Home() {
     <main className="flex-1 py-8 px-12 mt-3 md:px-12 lg:px-28 2xl:px-62 ">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4    gap-6">
         {filteredBookData.slice(startIndex, endIndex).map((book, index) => (
-          <Link key={index} to={`book/${book._id}`} className="group">
+          <Link key={index} to={`/book/${book._id}`} className="group">
             {/* <div className="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 transform group-hover:-translate-y-1 group-hover:shadow-lg"> */}
             <div className=" rounded-lg overflow-hidden shadow-md transition-transform duration-300 ">
               <div className="relative">

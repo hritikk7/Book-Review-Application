@@ -5,69 +5,58 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
-export default function Component() {
+export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const navigate = useNavigate();
 
-  console.log(email, password);
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    console.log("called handle login");
-    if (password === "" || email === "") {
-      setErrMsg("Fill all the Fileds");
-    }
-    loginCall();
-  };
-  const loginCall = async () => {
-    const apiUrl = "http://127.0.0.1:8080/api/user/login";
+  const registerUser = async () => {
+    const apiUrl = "http://127.0.0.1:8080/api/user/register";
     try {
       const data = {
-        email: email,
+        email,
         password,
       };
-      const response = await axios.post(apiUrl, data);
-      console.log("response.data", response.data);
-
-      if (response) {
-        navigate("/home");
-      }
-      if (response.data.message === "Login Succesfull") {
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("email", response.data.email);
-      }
+      const res = await axios.post(apiUrl, data).then((res) => {
+        console.log(res);
+        if (res.data.message === "Registration Succesfull") {
+          setEmail("");
+          setPassword("");
+          navigate("/login");
+        }
+      });
     } catch (err) {
-      console.log("Error Loggin in", err);
-      setErrMsg("Error Loggin in");
+      console.log("Error Regestring User: ", err);
       if (
         err.response &&
         err.response.data &&
-        err.response.data.message === "user not found"
+        err.response.data.message === "User already exists !!"
       ) {
-        setErrMsg("User not found");
-      } else if (
-        err.response &&
-        err.response.data &&
-        err.response.data.message === "password dosent match"
-      ) {
-        setErrMsg("Incorrect Password");
+        setErrMsg("User already exists");
+        // alert("User already exists. Please use a different email.");
       } else {
-        console.log("Error Logging User: ", err);
-        setErrMsg("Error Logging User");
+        console.log("Error Regestring User: ", err);
+        setErrMsg("Error Regestring User");
       }
     }
   };
+  const handleSignup = (e) => {
+    e.preventDefault();
+    if (password === "" || email === "") {
+      setErrMsg("Fill all the Fileds");
+    }
+    registerUser();
+  };
   return (
-    <div className=" px-8 flex min-h-screen items-center justify-center bg-gray-100 dark:bg-gray-950">
+    <div className="px-8 flex min-h-screen items-center justify-center bg-gray-100 dark:bg-gray-950">
       <div className="w-full max-w-md space-y-8">
         <div className="text-center">
           <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-50">
-            Welcome Back
+            SignUp
           </h1>
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-            Enter your credentials to access your account.
+            Create your account to get started
           </p>
         </div>
         <form className="space-y-6">
@@ -81,7 +70,9 @@ export default function Component() {
               required
               className="mt-1 block w-full"
               placeholder="Enter your email"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
             />
           </div>
           {/* <div>
@@ -106,26 +97,30 @@ export default function Component() {
               required
               className="mt-1 block w-full"
               placeholder="Enter your password"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
           </div>
 
           <Button
             type="submit"
             className="w-full"
-            onClick={(e) => handleLogin(e)}
+            onClick={(e) => {
+              handleSignup(e);
+            }}
           >
-            Sign in
+            Sign Up
           </Button>
           <div className="flex flex-col text-center">
-            <Link to={"/signup"} className="text-sm font-medium text-gray-600">
-              Don't have an account?{" "}
+            <Link to={"/"} className="text-sm font-medium text-gray-600">
+              Already have an account?{" "}
               <span className=" text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50">
                 {" "}
-                Sign Up{" "}
+                Login{" "}
               </span>
             </Link>
-            <span className="font-bold text-sm text-red-600">{errMsg}</span>
+            <span className="text-sm font-bold text-red-600">{errMsg}</span>
           </div>
         </form>
       </div>

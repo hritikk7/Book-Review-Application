@@ -88,9 +88,21 @@ function BookReview() {
   const handleRatingChange = (e) => {
     setNewReview((prev) => ({ ...prev, rating: Number(e) }));
   };
+
+  function formatDate(dateString) {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    const timeOptions = { hour: "2-digit", minute: "2-digit" };
+
+    const date = new Date(dateString);
+    const formattedDate = date.toLocaleDateString(undefined, options);
+    const formattedTime = date.toLocaleTimeString(undefined, timeOptions);
+
+    return `Posted on ${formattedDate} at ${formattedTime}`;
+  }
+
   return (
     <div className="flex flex-col min-h-screen">
-      <main className="flex-1 py-8 px-4 md:px-8">
+      <main className="flex-1 py-8 px-8 md:px-8">
         <div className="max-w-4xl mx-auto">
           {bookDetails.map((book) => (
             <div
@@ -215,7 +227,7 @@ function BookReview() {
                       </div>
                       <p className="text-gray-700">{review.comment}</p>
                       <p className="text-gray-500 text-sm mt-2">
-                        - {review.user} | Posted on {review.date}
+                        - {review.user} | Posted on {formatDate(review.date)}
                       </p>
                     </div>
                   ))}
