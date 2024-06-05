@@ -76,14 +76,13 @@ function BookReview() {
     let response = await axios.request(reqOptions);
     console.log("response", response.data);
 
-
     setNewReview({
       user: "",
       rating: 0,
       comment: "",
     });
     setShowReviewModal(false);
-    getBookDetails()
+    getBookDetails();
   };
 
   const handleRatingChange = (e) => {
@@ -100,8 +99,8 @@ function BookReview() {
             >
               <div className="relative">
                 <img
-                  src="/placeholder.svg"
-                  alt={book.title}
+                  // src="/placeholder.svg"
+                  // alt={book.title}
                   width={600}
                   height={800}
                   className="w-full h-96 object-cover"
@@ -112,20 +111,55 @@ function BookReview() {
                 <h1 className="text-3xl font-bold mb-2 text-gray-900">
                   {book.title}
                 </h1>
-                <p className="text-gray-600 text-sm mb-4">{book.author}</p>
+                <div className=" flex justify-between">
+                  <p className="text-gray-600 text-sm mb-4">{book.author}</p>
+                  <span className="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-800 dark:bg-gray-800 dark:text-gray-200">
+                    {book.genre}
+                  </span>
+                </div>
                 <p className="text-gray-700 leading-relaxed mb-6">
                   {book.description}
-                </p>
+                </p>{" "}
                 <div className="flex items-center mb-6">
                   <div className="flex items-center">
-                    <StarIcon className="w-5 h-5 text-yellow-500" />
-                    <StarIcon className="w-5 h-5 text-yellow-500" />
-                    <StarIcon className="w-5 h-5 text-yellow-500" />
-                    <StarIcon className="w-5 h-5 text-yellow-500" />
-                    <StarIcon className="w-5 h-5 text-gray-300" />
+                    <StarIcon
+                      className={`w-5 h-5 ${
+                        book.averageRating >= 1
+                          ? "text-yellow-500"
+                          : "text-gray-300"
+                      }`}
+                    />
+                    <StarIcon
+                      className={`w-5 h-5 ${
+                        book.averageRating >= 2
+                          ? "text-yellow-500"
+                          : "text-gray-300"
+                      }`}
+                    />
+                    <StarIcon
+                      className={`w-5 h-5 ${
+                        book.averageRating >= 3
+                          ? "text-yellow-500"
+                          : "text-gray-300"
+                      }`}
+                    />
+                    <StarIcon
+                      className={`w-5 h-5 ${
+                        book.averageRating >= 4
+                          ? "text-yellow-500"
+                          : "text-gray-300"
+                      }`}
+                    />
+                    <StarIcon
+                      className={`w-5 h-5 ${
+                        book.averageRating >= 5
+                          ? "text-yellow-500"
+                          : "text-gray-300"
+                      }`}
+                    />
                   </div>
                   <span className="ml-2 text-gray-500 text-sm">
-                    {/* {book.rating.toFixed(1)} */}
+                    {book.averageRating}
                   </span>
                 </div>
                 <div className="flex items-center justify-between mb-4">
@@ -139,11 +173,41 @@ function BookReview() {
                     <div key={review.id} className="bg-gray-100 rounded-lg p-4">
                       <div className="flex items-center mb-2">
                         <div className="flex items-center">
-                          <StarIcon className="w-4 h-4 text-yellow-500" />
-                          <StarIcon className="w-4 h-4 text-yellow-500" />
-                          <StarIcon className="w-4 h-4 text-yellow-500" />
-                          <StarIcon className="w-4 h-4 text-yellow-500" />
-                          <StarIcon className="w-4 h-4 text-gray-300" />
+                          <StarIcon
+                            className={`w-5 h-5 ${
+                              review.rating >= 1
+                                ? "text-yellow-500"
+                                : "text-gray-300"
+                            }`}
+                          />
+                          <StarIcon
+                            className={`w-5 h-5 ${
+                              review.rating >= 2
+                                ? "text-yellow-500"
+                                : "text-gray-300"
+                            }`}
+                          />
+                          <StarIcon
+                            className={`w-5 h-5 ${
+                              review.rating >= 3
+                                ? "text-yellow-500"
+                                : "text-gray-300"
+                            }`}
+                          />
+                          <StarIcon
+                            className={`w-5 h-5 ${
+                              review.rating >= 4
+                                ? "text-yellow-500"
+                                : "text-gray-300"
+                            }`}
+                          />
+                          <StarIcon
+                            className={`w-5 h-5 ${
+                              review.rating >= 5
+                                ? "text-yellow-500"
+                                : "text-gray-300"
+                            }`}
+                          />
                         </div>
                         <span className="ml-2 text-gray-500 text-sm">
                           {review.rating}
