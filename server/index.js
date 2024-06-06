@@ -9,7 +9,7 @@ const verifyToken = require("./middlewares/authMiddleware");
 const PORT = process.env.PORT || 8080;
 
 const corsOptions = {
-  origin: "book-review-application-backend.vercel.app",
+  origin: "https://book-review-application-frontend.vercel.app",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
