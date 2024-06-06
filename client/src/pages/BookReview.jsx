@@ -39,7 +39,7 @@ function BookReview() {
     };
 
     let reqOptions = {
-      url: `http://localhost:8080/api/books/getBookById/${bookId}`,
+      url: `https://book-review-application-backend.vercel.app/api/books/getBookById/${bookId}`,
       method: "GET",
       headers: headersList,
     };
@@ -67,7 +67,7 @@ function BookReview() {
     });
 
     let reqOptions = {
-      url: `http://localhost:8080/api/book/review/${bookId}`,
+      url: `https://book-review-application-backend.vercel.app/api/book/review/${bookId}`,
       method: "POST",
       headers: headersList,
       data: bodyContent,

@@ -29,7 +29,7 @@ function Home() {
     };
 
     let reqOptions = {
-      url: "http://localhost:8080/api/books/getAllBooks",
+      url: "https://book-review-application-backend.vercel.app/api/books/getAllBooks",
       method: "GET",
       headers: headersList,
     };

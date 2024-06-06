@@ -33,7 +33,7 @@ function Nav() {
     };
 
     let reqOptions = {
-      url: "http://localhost:8080/api/books/getAllBooks",
+      url: "https://book-review-application-backend.vercel.app/api/books/getAllBooks",
       method: "GET",
       headers: headersList,
     };
@@ -68,7 +68,7 @@ function Nav() {
     });
 
     let reqOptions = {
-      url: `http://localhost:8080/api/books/createBook`,
+      url: `https://book-review-application-backend.vercel.app/api/books/createBook`,
       method: "POST",
       headers: headersList,
       data: bodyContent,

@@ -12,7 +12,7 @@ export default function SignUp() {
   const navigate = useNavigate();
 
   const registerUser = async () => {
-    const apiUrl = "http://127.0.0.1:8080/api/user/register";
+    const apiUrl = "https://book-review-application-backend.vercel.app/api/user/register";
     try {
       const data = {
         email,

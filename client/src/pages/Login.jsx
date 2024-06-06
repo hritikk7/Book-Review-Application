@@ -22,7 +22,7 @@ export default function Component() {
     loginCall();
   };
   const loginCall = async () => {
-    const apiUrl = "http://127.0.0.1:8080/api/user/login";
+    const apiUrl = "https://book-review-application-backend.vercel.app/api/user/login";
     try {
       const data = {
         email: email,
