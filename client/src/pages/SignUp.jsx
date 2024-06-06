@@ -23,7 +23,7 @@ export default function SignUp() {
         if (res.data.message === "Registration Succesfull") {
           setEmail("");
           setPassword("");
-          navigate("/login");
+          navigate("/");
         }
       });
     } catch (err) {
