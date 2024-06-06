@@ -9,10 +9,10 @@ const verifyToken = require("./middlewares/authMiddleware");
 const PORT = process.env.PORT || 8080;
 
 const corsOptions = {
-  origin: "*",
+  origin: "book-review-application-backend.vercel.app",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"],
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   allowedHeaders: [
     "Content-Type",
     "Origin",
@@ -33,9 +33,8 @@ app.use(cors(corsOptions));
 //Middlewares
 app.use(express.json());
 
-app.get("/test", (req, res) => {
-  console.log("listning");
-  res.send("asdrf");
+app.get("/", (req, res) => {
+  res.send("Working");
 });
 
 //routes
